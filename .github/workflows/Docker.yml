@@ -19,5 +19,20 @@ jobs:
       uses: docker/login-action@v2.1.0   
       with:
         username: hugorebonato    
-        password: ${{ secrets.PASSWORD_DOCKER_HUB }}
+        password: ${{ secrets.PASSWORD_DOCKER_HUB }}   
   
+  
+  
+  
+    - name: Build and push Docker images
+  # uses: docker/build-push-action@3b5e8027fcad23fda98b2e3ac259d8d67585f671
+      uses: docker/build-push-action@v4.0.0
+      with:
+    # Build's context is the set of files located in the specified PATH or URL
+        context: .
+    # Path to the Dockerfile
+        file: ./Dockerfile
+        push: true
+      # List of tags
+        tags: hugorebonato/go_ci2:${{ github.ref_name}}
+    
